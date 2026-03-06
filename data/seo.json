@@ -1,25 +1,67 @@
 {
-  "title": "title",
-  "meta": [
-    {
-      "name": "description",
-      "content": "k1",
-      "property": ""
+  "site": {
+    "name": "Portfolio - Пан Кіт",
+    "url": "https://pan-kit.infinityfreeapp.com",
+    "author": "Пан Кіт",
+    "language": "uk"
+  },
+  "pages": {
+    "portfolio": {
+      "title": "Портфоліо розробника | Пан Кіт",
+      "description": "Мої проекти з веб-розробки на PHP. Портфоліо програміста з прикладами робіт, GitHub репозиторіями та посиланнями на сайти.",
+      "keywords": "портфоліо, веб розробка, PHP розробник, JavaScript, HTML, CSS, проекти, GitHub",
+      "robots": "index, follow",
+      "ogType": "website",
+      "canonical": "https://pan-kit.infinityfreeapp.com/"
     },
-    {
-      "name": "description",
-      "content": "k2",
-      "property": ""
+    "admin": {
+      "title": "Панель адміністратора | Portfolio",
+      "description": "Панель управління проектами портфоліо",
+      "keywords": "адмінка, управління, портфоліо",
+      "robots": "noindex, nofollow",
+      "ogType": "website",
+      "canonical": "https://pan-kit.infinityfreeapp.com/?page=admin"
     },
-    {
-      "name": "description",
-      "content": "k3",
-      "property": ""
-    },
-    {
-      "name": "robots",
-      "content": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
-      "property": ""
+    "admin-login": {
+      "title": "Вхід для адміністратора | Portfolio",
+      "description": "Авторизація в панелі адміністратора",
+      "keywords": "вхід, логін, адмін",
+      "robots": "noindex, nofollow",
+      "ogType": "website",
+      "canonical": "https://pan-kit.infinityfreeapp.com/?page=admin-login"
     }
-  ]
+  },
+  "meta": {
+    "default": {
+      "title": "Портфоліо розробника | Пан Кіт",
+      "description": "Мої проекти з веб-розробки на PHP. Портфоліо програміста з прикладами робіт.",
+      "keywords": "портфоліо, веб розробка, PHP, JavaScript, HTML, CSS, програміст",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "author": "Пан Кіт",
+      "themeColor": "#4f46e5"
+    },
+    "openGraph": {
+      "type": "website",
+      "locale": "uk_UA",
+      "siteName": "Portfolio - Пан Кіт",
+      "url": "https://pan-kit.infinityfreeapp.com",
+      "image": "https://pan-kit.infinityfreeapp.com/public/og-image.jpg",
+      "imageAlt": "Портфоліо розробника Пан Кіт"
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "site": "@pankit",
+      "creator": "@pankit"
+    },
+    "schema": {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Пан Кіт",
+      "url": "https://pan-kit.infinityfreeapp.com",
+      "jobTitle": "Веб-розробник",
+      "sameAs": [
+        "https://github.com/pankit"
+      ]
+    }
+  }
 }
