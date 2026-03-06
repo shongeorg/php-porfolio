@@ -35,5 +35,7 @@ Port
 SITE >>
 
 https://pan-kit.infinityfreeapp.com/
+admin123
+PASSWORD_DEFAULT
 
 << SITE

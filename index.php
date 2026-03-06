@@ -7,7 +7,7 @@ const COMPONENTS_PATH = DOC_ROOT . "components/";
 const DATA_PATH = DOC_ROOT . "data/";
 const FUNC_PATH = DOC_ROOT . "functions/";
 
-$page = $_GET["page"] ?? "home";
+$page = $_GET["page"] ?? "portfolio";
 $file = $page . ".php";
 $render_page = PAGE_PATH . (file_exists(PAGE_PATH . $file) ? $file : '404.php');
 
@@ -18,7 +18,7 @@ include FUNC_PATH . 'data-base.php';
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> 
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
