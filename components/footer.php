@@ -1,3 +1,3 @@
-<footer>
-    <p>C 2026 </p>
+<footer class="footer">
+    <p>© 2026 Портфоліо розробника | Пан Кіт</p>
 </footer>

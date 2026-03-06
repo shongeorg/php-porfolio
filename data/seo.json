@@ -1,41 +1,49 @@
 {
   "site": {
-    "name": "Portfolio - Пан Кіт",
+    "name": "Портфоліо розробника | Пан Кіт",
     "url": "https://pan-kit.infinityfreeapp.com",
     "author": "Пан Кіт",
     "language": "uk"
   },
   "pages": {
     "portfolio": {
-      "title": "Портфоліо розробника | Пан Кіт",
-      "description": "Мої проекти з веб-розробки на PHP. Портфоліо програміста з прикладами робіт, GitHub репозиторіями та посиланнями на сайти.",
-      "keywords": "портфоліо, веб розробка, PHP розробник, JavaScript, HTML, CSS, проекти, GitHub",
+      "title": "Портфоліо веб-розробника | Пан Кіт — Проєкти з PHP, JavaScript, CSS",
+      "description": "Портфоліо веб-розробника Пан Кіт. Проєкти з розробки сайтів на PHP, JavaScript, HTML та CSS. Приклади робіт, вихідний код на GitHub, готові рішення.",
+      "keywords": "портфоліо розробника, веб розробка, PHP програміст, JavaScript, HTML, CSS, створення сайтів, фронтенд, бекенд, GitHub, проєкти",
       "robots": "index, follow",
       "ogType": "website",
       "canonical": "https://pan-kit.infinityfreeapp.com/"
     },
     "admin": {
-      "title": "Панель адміністратора | Portfolio",
-      "description": "Панель управління проектами портфоліо",
-      "keywords": "адмінка, управління, портфоліо",
+      "title": "Панель адміністратора | Портфоліо",
+      "description": "Панель управління проєктами портфоліо. Додавання, редагування та видалення робіт.",
+      "keywords": "адмінка, панель управління, адміністрування портфоліо",
       "robots": "noindex, nofollow",
       "ogType": "website",
       "canonical": "https://pan-kit.infinityfreeapp.com/?page=admin"
     },
     "admin-login": {
-      "title": "Вхід для адміністратора | Portfolio",
-      "description": "Авторизація в панелі адміністратора",
-      "keywords": "вхід, логін, адмін",
+      "title": "Вхід для адміністратора | Портфоліо",
+      "description": "Авторизація в панелі адміністратора для управління портфоліо.",
+      "keywords": "вхід, логін, авторизація, адмін",
       "robots": "noindex, nofollow",
       "ogType": "website",
       "canonical": "https://pan-kit.infinityfreeapp.com/?page=admin-login"
+    },
+    "404": {
+      "title": "Сторінка не знайдена | Портфоліо",
+      "description": "На жаль, сторінка яку ви шукаєте не існує.",
+      "keywords": "помилка, 404, не знайдено",
+      "robots": "noindex, follow",
+      "ogType": "website",
+      "canonical": "https://pan-kit.infinityfreeapp.com/?page=404"
     }
   },
   "meta": {
     "default": {
-      "title": "Портфоліо розробника | Пан Кіт",
-      "description": "Мої проекти з веб-розробки на PHP. Портфоліо програміста з прикладами робіт.",
-      "keywords": "портфоліо, веб розробка, PHP, JavaScript, HTML, CSS, програміст",
+      "title": "Портфоліо веб-розробника | Пан Кіт — Проєкти з PHP та JavaScript",
+      "description": "Портфоліо веб-розробника. Проєкти з розробки сайтів на PHP, JavaScript, HTML та CSS. Готові рішення та індивідуальна розробка.",
+      "keywords": "портфоліо, веб розробка, PHP, JavaScript, HTML, CSS, програміст, створення сайтів, фронтенд розробник, бекенд розробник",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
       "author": "Пан Кіт",
       "themeColor": "#4f46e5"
@@ -43,10 +51,10 @@
     "openGraph": {
       "type": "website",
       "locale": "uk_UA",
-      "siteName": "Portfolio - Пан Кіт",
+      "siteName": "Портфоліо | Пан Кіт",
       "url": "https://pan-kit.infinityfreeapp.com",
       "image": "https://pan-kit.infinityfreeapp.com/public/og-image.jpg",
-      "imageAlt": "Портфоліо розробника Пан Кіт"
+      "imageAlt": "Портфоліо веб-розробника Пан Кіт — проєкти з PHP та JavaScript"
     },
     "twitter": {
       "card": "summary_large_image",
@@ -59,8 +67,20 @@
       "name": "Пан Кіт",
       "url": "https://pan-kit.infinityfreeapp.com",
       "jobTitle": "Веб-розробник",
+      "description": "Веб-розробник, що спеціалізується на створенні сайтів та веб-додатків на PHP, JavaScript, HTML та CSS.",
+      "nationality": "UA",
       "sameAs": [
         "https://github.com/pankit"
+      ],
+      "knowsAbout": [
+        "PHP",
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "MySQL",
+        "Веб-розробка",
+        "Фронтенд розробка",
+        "Бекенд розробка"
       ]
     }
   }

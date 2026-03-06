@@ -1,11 +1,11 @@
 <?php
 /**
  * SEO Helper Functions
- * Generate SEO meta tags from seo.json
+ * Генерація SEO meta-тегів з seo.json
  */
 
 /**
- * Load SEO data from JSON file
+ * Завантажити SEO-дані з JSON-файлу
  * @return array
  */
 function seoLoadData(): array
@@ -28,7 +28,7 @@ function seoLoadData(): array
 }
 
 /**
- * Get default SEO data as fallback
+ * Отримати стандартні SEO-дані (резервний варіант)
  * @return array
  */
 function seoGetDefaultData(): array
@@ -36,11 +36,11 @@ function seoGetDefaultData(): array
     return [
         'meta' => [
             'default' => [
-                'title' => 'Portfolio',
-                'description' => 'Моє портфоліо',
-                'keywords' => 'portfolio, php, web',
+                'title' => 'Портфоліо розробника',
+                'description' => 'Моє портфоліо веб-розробника',
+                'keywords' => 'портфоліо, php, веб-розробка',
                 'robots' => 'index, follow',
-                'author' => 'Admin',
+                'author' => 'Пан Кіт',
                 'themeColor' => '#4f46e5'
             ]
         ]
@@ -48,8 +48,8 @@ function seoGetDefaultData(): array
 }
 
 /**
- * Get SEO data for current page
- * @param string $page Current page name
+ * Отримати SEO-дані для поточної сторінки
+ * @param string $page Назва поточної сторінки
  * @return array
  */
 function seoGetForPage(string $page): array
@@ -57,17 +57,17 @@ function seoGetForPage(string $page): array
     $seo = seoLoadData();
     $page = $page === 'portfolio' ? 'portfolio' : $page;
     
-    // Get page-specific SEO or use default
+    // Отримати SEO для конкретної сторінки або використати стандартні
     $pageSeo = $seo['pages'][$page] ?? $seo['meta']['default'];
     $default = $seo['meta']['default'];
     
-    // Merge with defaults for missing fields
+    // Об'єднати зі стандартними значеннями для відсутніх полів
     return array_merge($default, $pageSeo);
 }
 
 /**
- * Generate and output all SEO meta tags
- * @param string $page Current page name
+ * Згенерувати та вивести всі SEO meta-теги
+ * @param string $page Назва поточної сторінки
  */
 function seoRenderTags(string $page): void
 {
@@ -94,10 +94,10 @@ function seoRenderTags(string $page): void
     $themeColor = htmlspecialchars($seo['themeColor'] ?? $siteSeo['meta']['default']['themeColor']);
     echo "    <meta name=\"theme-color\" content=\"{$themeColor}\">\n";
     
-    // ===== Viewport (always) =====
+    // ===== Viewport (завжди) =====
     echo "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n";
     
-    // ===== Charset (always) =====
+    // ===== Charset (завжди) =====
     echo "    <meta charset=\"UTF-8\">\n";
     
     // ===== Open Graph Tags =====
@@ -108,7 +108,7 @@ function seoRenderTags(string $page): void
     
     echo "    <meta property=\"og:type\" content=\"" . htmlspecialchars($og['type'] ?? 'website') . "\">\n";
     echo "    <meta property=\"og:locale\" content=\"" . htmlspecialchars($og['locale'] ?? 'uk_UA') . "\">\n";
-    echo "    <meta property=\"og:site_name\" content=\"" . htmlspecialchars($og['siteName'] ?? 'Portfolio') . "\">\n";
+    echo "    <meta property=\"og:site_name\" content=\"" . htmlspecialchars($og['siteName'] ?? 'Портфоліо') . "\">\n";
     echo "    <meta property=\"og:title\" content=\"{$ogTitle}\">\n";
     echo "    <meta property=\"og:description\" content=\"{$ogDescription}\">\n";
     echo "    <meta property=\"og:url\" content=\"{$ogUrl}\">\n";

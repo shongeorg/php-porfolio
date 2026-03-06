@@ -7,12 +7,12 @@ $projects = projectGetAllActive();
 
 <section class="portfolio">
     <div class="portfolio__container">
-        <h1 class="portfolio__title">Мои Проекты</h1>
-        <p class="portfolio__subtitle">Добро пожаловать в моё портфолио</p>
+        <h1 class="portfolio__title">Мої Проєкти</h1>
+        <p class="portfolio__subtitle">Ласкаво просимо до мого портфоліо</p>
         
         <?php if (empty($projects)): ?>
             <div class="portfolio__empty">
-                <p>Проектов пока нет</p>
+                <p>Проєктів поки що немає</p>
             </div>
         <?php else: ?>
             <div class="portfolio__grid">
