@@ -13,6 +13,10 @@ $username = '';
 
 // Handle login form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!csrfVerify()) {
+        $errors[] = 'Сесія протухла, оновіть сторінку і спробуйте ще раз';
+    }
+
     $username = trim($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
 
@@ -52,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
 
             <form class="auth__form" method="POST" action="/?page=admin-login">
+                <?= csrfField() ?>
                 <div class="form-group">
                     <label class="form-group__label" for="username">Ім'я користувача</label>
                     <input

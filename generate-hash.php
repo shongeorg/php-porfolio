@@ -9,4 +9,4 @@ echo "Хеш для пароля '{$password}':\n";
 echo $hash . "\n\n";
 
 echo "SQL запрос для обновления:\n";
-echo "UPDATE `admin` SET `password` = '{$hash}' WHERE `username` = 'admin';";
+echo "UPDATE admin SET password = '{$hash}' WHERE username = 'admin';";

@@ -10,69 +10,90 @@ $editProject = null;
 
 // Handle actions
 $action = $_GET['action'] ?? '';
-$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+// id приходить як GET (row edit link: ?action=edit&id=N) або POST (hidden-поля форм мутацій)
+$id = (int)($_GET['id'] ?? $_POST['id'] ?? 0);
+$isPost = $_SERVER['REQUEST_METHOD'] === 'POST';
 
-// Delete project
-if ($action === 'delete' && $id > 0) {
-    if (projectDelete($id)) {
-        $message = 'Проєкт видалено';
-        $messageType = 'success';
-    } else {
-        $message = 'Помилка при видаленні';
-        $messageType = 'error';
+// ---- Захист: усі мутації тільки через POST з валідним CSRF ----
+if ($isPost && !csrfVerify()) {
+    http_response_code(403);
+    $message = 'Сесія протухла, оновіть сторінку (CSRF-токен невалідний)';
+    $messageType = 'error';
+} else {
+    // Delete project
+    if ($isPost && $action === 'delete' && $id > 0) {
+        if (projectDelete($id)) {
+            $message = 'Проєкт видалено';
+            $messageType = 'success';
+        } else {
+            $message = 'Помилка при видаленні';
+            $messageType = 'error';
+        }
     }
-}
 
-// Toggle active status
-if ($action === 'toggle' && $id > 0) {
-    if (projectToggleActive($id)) {
-        $message = 'Статус змінено';
-        $messageType = 'success';
-    } else {
-        $message = 'Помилка при зміні статусу';
-        $messageType = 'error';
+    // Toggle active status
+    if ($isPost && $action === 'toggle' && $id > 0) {
+        if (projectToggleActive($id)) {
+            $message = 'Статус змінено';
+            $messageType = 'success';
+        } else {
+            $message = 'Помилка при зміні статусу';
+            $messageType = 'error';
+        }
     }
-}
 
-// Handle form submission (create/update)
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $data = [
-        'title' => trim($_POST['title'] ?? ''),
-        'description' => trim($_POST['description'] ?? ''),
-        'github_url' => trim($_POST['github_url'] ?? ''),
-        'site_url' => trim($_POST['site_url'] ?? ''),
-        'tags' => trim($_POST['tags'] ?? ''),
-        'sort_order' => (int)($_POST['sort_order'] ?? 0),
-        'is_active' => isset($_POST['is_active']) ? 1 : 0,
-    ];
+    // Move project up/down
+    if ($isPost && $action === 'move' && $id > 0) {
+        $dir = (($_POST['dir'] ?? '') === 'down') ? 1 : -1;
+        if (projectMove($id, $dir)) {
+            $message = 'Порядок змінено';
+            $messageType = 'success';
+        } else {
+            $message = 'Помилка при зміні порядку';
+            $messageType = 'error';
+        }
+    }
 
-    $errors = projectValidate($data);
+    // Handle form submission (create/update)
+    if ($isPost && $action === '') {
+        $data = [
+            'title' => trim($_POST['title'] ?? ''),
+            'description' => trim($_POST['description'] ?? ''),
+            'github_url' => trim($_POST['github_url'] ?? ''),
+            'site_url' => trim($_POST['site_url'] ?? ''),
+            'tags' => trim($_POST['tags'] ?? ''),
+            'sort_order' => (int)($_POST['sort_order'] ?? 0),
+            'is_active' => isset($_POST['is_active']) ? 1 : 0,
+        ];
 
-    if (empty($errors)) {
-        $editId = isset($_POST['id']) ? (int)$_POST['id'] : 0;
+        $errors = projectValidate($data);
 
-        if ($editId > 0) {
-            // Update existing
-            if (projectUpdate($editId, $data)) {
-                $message = 'Проєкт оновлено';
-                $messageType = 'success';
+        if (empty($errors)) {
+            $editId = isset($_POST['id']) ? (int)$_POST['id'] : 0;
+
+            if ($editId > 0) {
+                // Update existing
+                if (projectUpdate($editId, $data)) {
+                    $message = 'Проєкт оновлено';
+                    $messageType = 'success';
+                } else {
+                    $message = 'Помилка при оновленні';
+                    $messageType = 'error';
+                }
             } else {
-                $message = 'Помилка при оновленні';
-                $messageType = 'error';
+                // Create new
+                if (projectCreate($data)) {
+                    $message = 'Проєкт створено';
+                    $messageType = 'success';
+                } else {
+                    $message = 'Помилка при створенні';
+                    $messageType = 'error';
+                }
             }
         } else {
-            // Create new
-            if (projectCreate($data)) {
-                $message = 'Проєкт створено';
-                $messageType = 'success';
-            } else {
-                $message = 'Помилка при створенні';
-                $messageType = 'error';
-            }
+            $message = implode('<br>', $errors);
+            $messageType = 'error';
         }
-    } else {
-        $message = implode('<br>', $errors);
-        $messageType = 'error';
     }
 }
 
@@ -105,6 +126,7 @@ $projects = projectGetAll();
             <div class="form-card">
                 <h2 class="form-card__title">Редагувати проєкт</h2>
                 <form class="project-form" method="POST" action="/?page=admin-projects">
+                    <?= csrfField() ?>
                     <input type="hidden" name="id" value="<?= $editProject['id'] ?>">
 
                     <div class="form-group">
@@ -207,6 +229,7 @@ $projects = projectGetAll();
             <div class="form-card">
                 <h2 class="form-card__title">Новий проєкт</h2>
                 <form class="project-form" method="POST" action="/?page=admin-projects">
+                    <?= csrfField() ?>
                     <div class="form-group">
                         <label class="form-group__label" for="title">Назва *</label>
                         <input
@@ -342,22 +365,39 @@ $projects = projectGetAll();
                                     <?php endif; ?>
                                 </td>
                                 <td class="data-table__actions">
+                                    <form method="POST" action="/?page=admin-projects&action=move" class="action-form">
+                                        <?= csrfField() ?>
+                                        <input type="hidden" name="id" value="<?= $project['id'] ?>">
+                                        <input type="hidden" name="dir" value="up">
+                                        <button type="submit" class="action-btn action-btn--move" title="Перемістити вище">⬆️</button>
+                                    </form>
+                                    <form method="POST" action="/?page=admin-projects&action=move" class="action-form">
+                                        <?= csrfField() ?>
+                                        <input type="hidden" name="id" value="<?= $project['id'] ?>">
+                                        <input type="hidden" name="dir" value="down">
+                                        <button type="submit" class="action-btn action-btn--move" title="Перемістити нижче">⬇️</button>
+                                    </form>
                                     <a href="/?page=admin-projects&action=edit&id=<?= $project['id'] ?>"
                                        class="action-btn action-btn--edit"
                                        title="Редагувати">
                                         ✏️
                                     </a>
-                                    <a href="/?page=admin-projects&action=toggle&id=<?= $project['id'] ?>"
-                                       class="action-btn action-btn--toggle"
-                                       title="Змінити статус">
-                                        <?= $project['is_active'] ? '🙈' : '👁️' ?>
-                                    </a>
-                                    <a href="/?page=admin-projects&action=delete&id=<?= $project['id'] ?>"
-                                       class="action-btn action-btn--delete"
-                                       title="Видалити"
-                                       onclick="return confirm('Видалити проєкт \'<?= htmlspecialchars($project['title']) ?>\'?')">
-                                        🗑️
-                                    </a>
+                                    <form method="POST" action="/?page=admin-projects&action=toggle" class="action-form">
+                                        <?= csrfField() ?>
+                                        <input type="hidden" name="id" value="<?= $project['id'] ?>">
+                                        <button type="submit" class="action-btn action-btn--toggle" title="<?= $project['is_active'] ? 'Приховати' : 'Показати' ?>">
+                                            <?= $project['is_active'] ? '🙈' : '👁️' ?>
+                                        </button>
+                                    </form>
+                                    <form method="POST" action="/?page=admin-projects&action=delete" class="action-form">
+                                        <?= csrfField() ?>
+                                        <input type="hidden" name="id" value="<?= $project['id'] ?>">
+                                        <button type="submit" class="action-btn action-btn--delete"
+                                                title="Видалити"
+                                                onclick="return confirm('Видалити проєкт \'<?= htmlspecialchars($project['title']) ?>\'?')">
+                                            🗑️
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

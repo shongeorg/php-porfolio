@@ -184,14 +184,21 @@ pan-kit.infinityfreeapp.com/
 │   ├── admin-projects.php    # CRUD проєктів
 │   └── 404.php               # Помилка 404
 ├── functions/                # ⚙️ Допоміжні функції
-│   ├── data-base.php         # Робота з БД (Singleton)
-│   └── seo.php               # SEO meta-теги
+│   ├── data-base.php         # Робота з БД (Singleton, postgres/mysql з URL)
+│   ├── security.php          # CSRF-токени
+│   └── seo.php               # SEO meta-теги + JSON-LD
 ├── data/                     # 📊 Дані
 │   └── seo.json              # SEO конфігурація
-├── public/                   # 🎨 Статичні файли
+├── public/                   # 🌐 Статика + front controller
+│   ├── index.php             # Вхід для docroot=public (Herd/Valet)
 │   ├── index.css             # Стилі (BEM + CSS змінні)
-│   └── index.js              # JavaScript
-└── data-base.sql             # 🗄️ SQL схема бази даних
+│   ├── index.js              # JavaScript
+│   ├── favicon.svg           # Іконка (😎)
+│   ├── robots.txt            # Правила для роботів
+│   └── sitemap.xml           # Карта сайту
+├── scripts/init-db.php       # Ініціалізація БД + сиди
+├── .env.example              # Приклад конфіга БД
+└── data-base.sql             # 🗄️ SQL схема бази даних (Postgres)
 ```
 
 ---
@@ -199,34 +206,31 @@ pan-kit.infinityfreeapp.com/
 ## 🚀 Встановлення
 
 ### Вимоги:
-- PHP 8.0+
-- MySQL 5.7+
-- Веб-сервер (Apache/Nginx)
+- PHP 8.0+ (розширення `pdo_pgsql` або `pdo_mysql`)
+- PostgreSQL (перевірено Neon) або MySQL 5.7+
+- Веб-сервер (Apache/Nginx) — наприклад, [Herd/Valet](https://herd.laravel.com) локально
 
 ### Кроки:
 
-1. **Завантажте файли на сервер**
+1. **Клонуйте репозиторій у docroot** (коренем сайту може бути і сама папка, і `public/` — обидва варіанти працюють: `public/index.php` підключає кореневий `index.php`).
+
+2. **Підключіть базу даних через `.env`**
+   Створіть файл `.env` у корені (не комітиться):
+   ```ini
+   NEON_DB=postgresql://user:password@host/dbname?sslmode=require
+   ```
+   Підтримуються схеми `postgres://`/`postgresql://` та `mysql://`. Значення також можна передати через оточення (`NEON_DB`, `DATABASE_URL`, `MYSQL_URL`).
+
+3. **Створіть схему** (таблиці `admin` і `projects`):
    ```bash
-   # Через FTP або копіюванням у htdocs/www/public_html
+   php scripts/init-db.php
    ```
-
-2. **Імпортуйте базу даних**
+   Скрипт заодно оновлює локального тест-адміна `admin/admin` — на проді приберіть цей крок або замініть логін/пароль вручну в БД:
    ```sql
-   mysql -u username -p database_name < data-base.sql
+   INSERT INTO admin (username, password) VALUES ('ваш_логін', '<bcrypt-хеш через generate-hash.php>');
    ```
 
-3. **Налаштуйте підключення до БД**
-   
-   Відредагуйте `functions/data-base.php`:
-   ```php
-   new PDO(
-       "mysql:dbname=YOUR_DB;host=localhost;charset=utf8mb4",
-       "YOUR_USERNAME",
-       "YOUR_PASSWORD"
-   );
-   ```
-
-4. **Готово!** Відкрийте сайт у браузері.
+4. **Готово!** Відкрийте сайт у браузері. Адмінка: `/?page=admin-login`.
 
 ---
 

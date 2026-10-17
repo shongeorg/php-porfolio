@@ -15,14 +15,8 @@ PHP max_execution_time is 60 seconds
 
 MYSQL >>
 
-Username
-if0_41319385
-
-Password
-K1QjjXi2LrX
-
-Database
-if0_41319385_XXX
+Username / Password / Database
+(креды в secret-менеджері, не в репо)
 
 Hostname
 sql100.infinityfree.com

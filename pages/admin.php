@@ -5,8 +5,8 @@
 requireAdmin();
 
 $stats = [
-    'total_projects' => dbCount('projects'),
-    'active_projects' => db()->query("SELECT COUNT(*) FROM `projects` WHERE is_active = 1")->fetchColumn(),
+    'total_projects' => db() !== null ? (int) dbCount('projects') : 0,
+    'active_projects' => db() !== null ? (int) db()->query("SELECT COUNT(*) FROM projects WHERE is_active = 1")->fetchColumn() : 0,
 ];
 ?>
 

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <circle cx="32" cy="32" r="30" fill="#facc15"/>
+  <!-- окуляри 😎 -->
+  <rect x="8" y="24" width="20" height="12" rx="4" fill="#111827"/>
+  <rect x="36" y="24" width="20" height="12" rx="4" fill="#111827"/>
+  <path d="M28 27h8v3h-8z" fill="#111827"/>
+  <path d="M20 46q12 9 24 0" stroke="#111827" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>

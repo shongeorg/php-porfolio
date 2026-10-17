@@ -135,12 +135,41 @@ function seoRenderTags(string $page): void
     }
     
     // ===== Favicon =====
-    echo "    <link rel=\"icon\" type=\"image/x-icon\" href=\"/public/favicon.ico\">\n";
+    echo "    <link rel=\"icon\" type=\"image/svg+xml\" href=\"" . ASSET_BASE . "favicon.svg\">\n";
     
     // ===== Schema.org JSON-LD =====
     $schema = $siteSeo['meta']['schema'] ?? null;
     if ($schema) {
         $schemaJson = json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
         echo "    <script type=\"application/ld+json\">\n{$schemaJson}\n    </script>\n";
+    }
+
+    // ===== ItemList проєктів (для портфоліо) =====
+    if ($page === 'portfolio' || $page === 'home') {
+        $siteUrl = $siteSeo['site']['url'] ?? '';
+        $items = [];
+        foreach (array_slice(projectGetAllActive(), 0, 10) as $i => $project) {
+            $item = ['@type' => 'ListItem', 'position' => $i + 1];
+            $itemUrl = $project['site_url'] ?: $project['github_url'];
+            if ($itemUrl) {
+                $item['url'] = $itemUrl;
+            }
+            $item['name'] = $project['title'];
+            $items[] = $item;
+        }
+        if ($items) {
+            $itemList = [
+                '@context' => 'https://schema.org',
+                '@type' => 'ItemList',
+                'name' => 'Проєкти портфоліо',
+                'numberOfItems' => count($items),
+                'itemListElement' => $items,
+            ];
+            if ($siteUrl) {
+                $itemList['url'] = $siteUrl . '/?page=portfolio';
+            }
+            $listJson = json_encode($itemList, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+            echo "    <script type=\"application/ld+json\">\n{$listJson}\n    </script>\n";
+        }
     }
 }

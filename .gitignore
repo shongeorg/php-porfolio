@@ -1,0 +1,13 @@
+# Secrets / локальні конфіги
+.env
+.env.*
+*.local
+.vscode/sftp.json
+opencode.jsonc
+
+# Системні файли
+Thumbs.db
+.DS_Store
+
+# Кеш і логи
+*.log

@@ -11,28 +11,30 @@
   --color-danger-hover: #dc2626;
   --color-success: #22c55e;
   --color-warning: #f59e0b;
-  
+
   /* Backgrounds */
   --color-bg: #f3f4f6;
   --color-bg-card: #ffffff;
   --color-bg-header: #1f2937;
-  
+
   /* Text */
   --color-text: #111827;
   --color-text-muted: #6b7280;
   --color-text-light: #f9fafb;
-  
+
   /* Borders */
   --color-border: #e5e7eb;
-  
+
   /* Typography */
-  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  --font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    sans-serif;
   --font-size-base: 16px;
   --font-size-sm: 14px;
   --font-size-lg: 18px;
   --font-size-xl: 24px;
   --font-size-2xl: 32px;
-  
+
   /* Spacing */
   --spacing-xs: 4px;
   --spacing-sm: 8px;
@@ -40,18 +42,18 @@
   --spacing-lg: 24px;
   --spacing-xl: 32px;
   --spacing-2xl: 48px;
-  
+
   /* Shadows */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-  
+
   /* Border Radius */
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-full: 9999px;
-  
+
   /* Transitions */
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
@@ -166,6 +168,31 @@ main {
   margin-top: auto;
 }
 
+.footer__links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.footer__link {
+  color: var(--color-text-light);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  opacity: 0.9;
+  transition: opacity var(--transition-fast);
+}
+
+.footer__link:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.footer__sep {
+  opacity: 0.5;
+}
+
 /* ========================================
    Portfolio Section
    ======================================== */
@@ -208,13 +235,15 @@ main {
    Project Card (BEM)
    ======================================== */
 .project-card {
+  display: grid;
+  grid-template-columns: subgrid;
   background-color: var(--color-bg-card);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   overflow: hidden;
-  transition: transform var(--transition-base), box-shadow var(--transition-base);
-  display: flex;
-  flex-direction: column;
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
 }
 
 .project-card:hover {
@@ -223,7 +252,11 @@ main {
 }
 
 .project-card__header {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-primary-hover)
+  );
   padding: var(--spacing-lg);
   color: var(--color-text-light);
 }
@@ -509,7 +542,9 @@ main {
   border-radius: var(--radius-md);
   font-size: var(--font-size-base);
   font-family: var(--font-family);
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 .form-group__input:focus {
@@ -635,6 +670,10 @@ main {
   border-radius: var(--radius-md);
   transition: background-color var(--transition-fast);
   font-size: var(--font-size-lg);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
 }
 
 .action-btn--edit:hover {
@@ -647,6 +686,16 @@ main {
 
 .action-btn--delete:hover {
   background-color: #fee2e2;
+}
+
+.action-btn--move:hover {
+  background-color: #ede9fe;
+}
+
+.action-form {
+  display: inline-flex;
+  margin: 0;
+  line-height: 1;
 }
 
 /* ========================================
@@ -701,23 +750,23 @@ main {
     flex-direction: column;
     gap: var(--spacing-md);
   }
-  
+
   .portfolio__grid {
     grid-template-columns: 1fr;
   }
-  
+
   .admin__stats {
     grid-template-columns: 1fr;
   }
-  
+
   .admin__actions {
     flex-direction: column;
   }
-  
+
   .admin-btn {
     justify-content: center;
   }
-  
+
   main {
     padding: var(--spacing-md);
   }
