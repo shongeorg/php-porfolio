@@ -26,3 +26,18 @@ CREATE TABLE IF NOT EXISTS projects (
     is_active INT DEFAULT 1,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Налаштування сайту (key/value): github_username, github_location, github_theme ...
+CREATE TABLE IF NOT EXISTS settings (
+    id SERIAL PRIMARY KEY,
+    setting_key VARCHAR(64) NOT NULL UNIQUE,
+    setting_value VARCHAR(255),
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO settings (setting_key, setting_value) VALUES ('github_username', 'shongeorg')
+    ON CONFLICT (setting_key) DO NOTHING;
+INSERT INTO settings (setting_key, setting_value) VALUES ('github_location', 'Global')
+    ON CONFLICT (setting_key) DO NOTHING;
+INSERT INTO settings (setting_key, setting_value) VALUES ('github_theme', 'dark')
+    ON CONFLICT (setting_key) DO NOTHING;

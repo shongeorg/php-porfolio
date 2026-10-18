@@ -11,3 +11,4 @@ Thumbs.db
 
 # Кеш і логи
 *.log
+data/cache/

@@ -39,6 +39,13 @@ if ($driver === 'pgsql') {
             is_active INT DEFAULT 1,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
+
+        CREATE TABLE IF NOT EXISTS settings (
+            id SERIAL PRIMARY KEY,
+            setting_key VARCHAR(64) NOT NULL UNIQUE,
+            setting_value VARCHAR(255),
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
         SQL);
 } else {
     $db->exec(<<<'SQL'
@@ -61,10 +68,24 @@ if ($driver === 'pgsql') {
             is_active TINYINT(1) DEFAULT 1,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
+
+        CREATE TABLE IF NOT EXISTS settings (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            setting_key VARCHAR(64) NOT NULL UNIQUE,
+            setting_value VARCHAR(255),
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
         SQL);
 }
 
 echo "Схема готова.\n";
+
+// ---------- Дефолтні налаштування (панель «Живий GitHub») ----------
+
+settingSet('github_username', 'shongeorg');
+settingSet('github_location', 'Global');
+settingSet('github_theme', 'dark');
+echo "Настройки: github_username=shongeorg, github_location=Global, github_theme=dark.\n";
 
 // ---------- Admin: admin/admin ----------
 

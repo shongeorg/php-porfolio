@@ -60,6 +60,81 @@
 }
 
 /* ========================================
+   Сайтові теми (data-theme на <body>)
+   Кожна тема перекриває глобальні змінні —
+   решта компонентів масштабується сама.
+   ======================================== */
+body[data-theme="dark"] {
+  --color-primary: #58a6ff;
+  --color-primary-hover: #79c0ff;
+  --color-bg: #0d1117;
+  --color-bg-card: #161b22;
+  --color-bg-header: #010409;
+  --color-text: #e6edf3;
+  --color-text-muted: #8b949e;
+  --color-text-light: #e6edf3;
+  --color-border: #30363d;
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+}
+
+body[data-theme="midnight"] {
+  --color-primary: #818cf8;
+  --color-primary-hover: #a5b4fc;
+  --color-bg: #010409;
+  --color-bg-card: #0a0d18;
+  --color-bg-header: #000000;
+  --color-text: #e0e7ff;
+  --color-text-muted: #7c86a8;
+  --color-text-light: #e0e7ff;
+  --color-border: #1a2030;
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.6);
+}
+
+body[data-theme="neon"] {
+  --color-primary: #39d353;
+  --color-primary-hover: #4ade80;
+  --color-bg: #0a1411;
+  --color-bg-card: #10231a;
+  --color-bg-header: #061510;
+  --color-text: #d1fae5;
+  --color-text-muted: #6ee7a0;
+  --color-text-light: #d1fae5;
+  --color-border: #1d4431;
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+}
+
+body[data-theme="ocean"] {
+  --color-primary: #22d3ee;
+  --color-primary-hover: #67e8f9;
+  --color-bg: #082f49;
+  --color-bg-card: #0b3a52;
+  --color-bg-header: #041c2c;
+  --color-text: #cffafe;
+  --color-text-muted: #85cfe0;
+  --color-text-light: #cffafe;
+  --color-border: #155e75;
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.45);
+}
+
+body[data-theme="sunset"] {
+  --color-primary: #fb923c;
+  --color-primary-hover: #fdba74;
+  --color-bg: #1a0d04;
+  --color-bg-card: #241205;
+  --color-bg-header: #120803;
+  --color-text: #fed7aa;
+  --color-text-muted: #c98a5e;
+  --color-text-light: #fed7aa;
+  --color-border: #7c3a10;
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* ========================================
    Base Styles (Reset)
    ======================================== */
 *,
@@ -336,6 +411,396 @@ main {
 }
 
 /* ========================================
+   GitHub Live Panel (cards from own API)
+   ======================================== */
+.github-panel {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-2xl);
+
+  /* Тема за замовчуванням — dark */
+  --gh-accent: #58a6ff;
+  --gh-card-bg: linear-gradient(135deg, #0b1220, #0d1117);
+  --gh-card-border: transparent;
+  --gh-card-title: #e5e7eb;
+  --gh-card-subtitle: #9ca3af;
+  --gh-tile-bg: rgba(88, 166, 255, 0.08);
+  --gh-tracks: #1f2937;
+  --gh-divider: #1f2937;
+  --gh-donut-hole: #0b1220;
+  --gh-banner-bg: #0d1117;
+  --gh-banner-border: #30363d;
+  --gh-banner-title: #58a6ff;
+  --gh-badge-label-bg: #161b22;
+}
+
+.github-panel--midnight {
+  --gh-accent: #818cf8;
+  --gh-card-bg: linear-gradient(135deg, #05070d, #010409);
+  --gh-tile-bg: rgba(129, 140, 248, 0.09);
+  --gh-tracks: #14192a;
+  --gh-divider: #14192a;
+  --gh-donut-hole: #04060c;
+  --gh-banner-bg: #010409;
+  --gh-banner-border: #1a2030;
+  --gh-banner-title: #818cf8;
+  --gh-badge-label-bg: #090d18;
+}
+
+.github-panel--neon {
+  --gh-accent: #39d353;
+  --gh-card-bg: linear-gradient(135deg, #0a1411, #0d1117);
+  --gh-tile-bg: rgba(57, 211, 83, 0.09);
+  --gh-tracks: #123322;
+  --gh-divider: #123322;
+  --gh-donut-hole: #0a1411;
+  --gh-banner-bg: #0a1411;
+  --gh-banner-border: #1d4431;
+  --gh-banner-title: #4ade80;
+  --gh-badge-label-bg: #0e2419;
+}
+
+.github-panel--ocean {
+  --gh-accent: #22d3ee;
+  --gh-card-bg: linear-gradient(135deg, #062a3e, #082f49);
+  --gh-tile-bg: rgba(34, 211, 238, 0.09);
+  --gh-tracks: #123a52;
+  --gh-divider: #123a52;
+  --gh-donut-hole: #062a3e;
+  --gh-banner-bg: #062a3e;
+  --gh-banner-border: #155e75;
+  --gh-banner-title: #67e8f9;
+  --gh-badge-label-bg: #0b3a52;
+}
+
+.github-panel--sunset {
+  --gh-accent: #fb923c;
+  --gh-card-bg: linear-gradient(135deg, #241205, #1a0d04);
+  --gh-tile-bg: rgba(251, 146, 60, 0.09);
+  --gh-tracks: #3f2411;
+  --gh-divider: #3f2411;
+  --gh-donut-hole: #241205;
+  --gh-banner-bg: #241205;
+  --gh-banner-border: #7c3a10;
+  --gh-banner-title: #fdba74;
+  --gh-badge-label-bg: #331a07;
+}
+
+.github-panel--light {
+  --gh-accent: #4f46e5;
+  --gh-card-bg: #ffffff;
+  --gh-card-border: var(--color-border);
+  --gh-card-title: #111827;
+  --gh-card-subtitle: #6b7280;
+  --gh-tile-bg: rgba(79, 70, 229, 0.07);
+  --gh-tracks: #e5e7eb;
+  --gh-divider: #e5e7eb;
+  --gh-donut-hole: #ffffff;
+  --gh-banner-bg: #ffffff;
+  --gh-banner-border: var(--color-border);
+  --gh-banner-title: #58a6ff;
+  --gh-badge-label-bg: #111827;
+}
+
+.github-panel__head {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.github-panel__title {
+  font-size: var(--font-size-xl);
+  color: var(--color-text);
+}
+
+.github-panel__subtitle {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+/* ---------- Банер ---------- */
+.gh-banner {
+  background-color: var(--gh-banner-bg);
+  border: 1px solid var(--gh-banner-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg) var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.gh-banner__title {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 500;
+  font-size: 28px;
+  letter-spacing: 0.06em;
+  color: var(--gh-banner-title);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.gh-banner__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-top: var(--spacing-md);
+}
+
+.gh-badge {
+  display: inline-flex;
+  overflow: hidden;
+  border-radius: 2px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.gh-badge__label {
+  background-color: var(--gh-badge-label-bg);
+  color: #ffffff;
+  padding: 7px 10px;
+}
+
+.gh-badge__value {
+  background-color: #2563eb;
+  color: #ffffff;
+  padding: 7px 10px;
+}
+
+.gh-badge__value--orange {
+  background-color: #f97316;
+}
+
+.gh-badge__value--sky {
+  background-color: #60a5fa;
+}
+
+.gh-banner__line {
+  margin-top: var(--spacing-md);
+  border-top: 2px solid var(--gh-divider);
+}
+
+/* ---------- Сітка і картки-віджети ---------- */
+.gh-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.gh-row > * {
+  min-width: 0;
+}
+
+.gh-card {
+  position: relative;
+  background: var(--gh-card-bg);
+  border: 1px solid var(--gh-card-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  color: var(--gh-card-subtitle);
+  overflow: hidden;
+}
+
+.gh-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background-color: var(--gh-accent);
+}
+
+.gh-card__title {
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  color: var(--gh-card-title);
+  margin-bottom: var(--spacing-xs);
+}
+
+.gh-card__subtitle {
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+/* ---------- Тайлові міні-метрики ---------- */
+.gh-card--stats {
+  display: flex;
+  flex-direction: column;
+}
+
+.gh-card--stats .gh-tiles {
+  flex: 1;
+  align-content: stretch;
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.gh-tiles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.gh-tile {
+  background-color: var(--gh-tile-bg);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm);
+  text-align: center;
+  min-width: 0;
+}
+
+.gh-tile__value {
+  display: block;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--gh-accent);
+  line-height: 1.2;
+}
+
+.gh-tile__label {
+  font-size: 11px;
+  color: var(--gh-card-subtitle);
+}
+
+/* ---------- Мови: донат + легенда ---------- */
+.gh-langs {
+  display: flex;
+  gap: var(--spacing-lg);
+  align-items: center;
+}
+
+.gh-donut {
+  position: relative;
+  z-index: 0;
+  flex-shrink: 0;
+  width: 132px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+}
+
+.gh-donut::after {
+  content: '';
+  position: absolute;
+  inset: 22%;
+  background-color: var(--gh-donut-hole);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.gh-donut__label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.gh-donut__percent {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--gh-accent);
+  line-height: 1.2;
+}
+
+.gh-donut__lang {
+  font-size: 11px;
+  color: var(--gh-card-subtitle);
+  max-width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gh-legend {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.gh-legend__row {
+  display: grid;
+  grid-template-columns: 12px minmax(72px, auto) 1fr 42px;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.gh-legend__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.gh-legend__name {
+  color: var(--gh-card-title);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gh-legend__track {
+  height: 8px;
+  background-color: var(--gh-tracks);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.gh-legend__fill {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-full);
+}
+
+.gh-legend__pct {
+  color: var(--gh-card-subtitle);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Стріки ---------- */
+.gh-streak {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-md);
+  text-align: center;
+}
+
+.gh-streak__col {
+  padding: var(--spacing-sm) 0;
+}
+
+.gh-streak__col + .gh-streak__col {
+  border-left: 1px solid var(--gh-divider);
+}
+
+.gh-streak__value {
+  display: block;
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--gh-accent);
+  line-height: 1.2;
+}
+
+.gh-streak__label {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--gh-card-title);
+  margin-top: var(--spacing-xs);
+}
+
+/* ========================================
    Admin Styles
    ======================================== */
 .admin__container,
@@ -538,6 +1003,8 @@ main {
 .form-group__input {
   width: 100%;
   padding: var(--spacing-sm) var(--spacing-md);
+  background-color: transparent;
+  color: var(--color-text);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   font-size: var(--font-size-base);
@@ -753,6 +1220,37 @@ main {
 
   .portfolio__grid {
     grid-template-columns: 1fr;
+  }
+
+  .github-panel {
+    padding: var(--spacing-md);
+  }
+
+  .gh-row {
+    grid-template-columns: 1fr;
+  }
+
+  .gh-banner__title {
+    font-size: 22px;
+  }
+
+  .gh-langs {
+    flex-direction: column;
+  }
+
+  .gh-donut {
+    width: 140px;
+  }
+
+  .gh-streak {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
+
+  .gh-streak__col + .gh-streak__col {
+    border-left: none;
+    border-top: 1px solid var(--gh-divider);
+    padding-top: var(--spacing-sm);
   }
 
   .admin__stats {

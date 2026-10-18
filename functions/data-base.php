@@ -213,6 +213,54 @@ function dbEscapeIdentifier(string $identifier): string
     return preg_replace('/[^a-zA-Z0-9_]/', '', $identifier);
 }
 
+// ==================== Settings (key/value) ====================
+
+/**
+ * Get a site setting from the settings table (db unavailable → default)
+ */
+function settingGet(string $key, ?string $default = null): ?string
+{
+    if (db() === null) {
+        return $default;
+    }
+
+    try {
+        $stmt = db()->prepare("SELECT setting_value FROM settings WHERE setting_key = ?");
+        $stmt->execute([$key]);
+        $value = $stmt->fetchColumn();
+    } catch (Throwable $e) {
+        error_log('settingGet error: ' . $e->getMessage());
+        return $default;
+    }
+
+    return ($value === false || $value === null || $value === '') ? $default : (string) $value;
+}
+
+/**
+ * Save a setting (upsert: postgres ON CONFLICT / mysql ON DUPLICATE KEY)
+ */
+function settingSet(string $key, string $value): bool
+{
+    if (db() === null) {
+        return false;
+    }
+
+    $driver = db()->getAttribute(PDO::ATTR_DRIVER_NAME);
+    $sql = $driver === 'mysql'
+        ? "INSERT INTO settings (setting_key, setting_value) VALUES (?, ?)
+           ON DUPLICATE KEY UPDATE setting_value = VALUES(setting_value), updated_at = CURRENT_TIMESTAMP"
+        : "INSERT INTO settings (setting_key, setting_value) VALUES (?, ?)
+           ON CONFLICT (setting_key) DO UPDATE SET setting_value = EXCLUDED.setting_value, updated_at = CURRENT_TIMESTAMP";
+
+    try {
+        $stmt = db()->prepare($sql);
+        return $stmt->execute([$key, $value]);
+    } catch (Throwable $e) {
+        error_log('settingSet error: ' . $e->getMessage());
+        return false;
+    }
+}
+
 // ==================== Admin Functions ====================
 
 /**

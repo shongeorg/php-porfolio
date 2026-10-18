@@ -29,6 +29,7 @@ $render_page = PAGE_PATH . (file_exists(PAGE_PATH . $file) ? $file : '404.php');
 include FUNC_PATH . 'data-base.php';
 include FUNC_PATH . 'security.php';
 include FUNC_PATH . 'seo.php';
+include FUNC_PATH . 'github-live.php';
 ?>
 
 
@@ -38,7 +39,7 @@ include FUNC_PATH . 'seo.php';
     <?php seoRenderTags($page); ?>
     <link rel="stylesheet" href="<?= ASSET_BASE ?>index.css">
 </head>
-<body>
+<body data-theme="<?= githubLiveTheme() ?>">
 <?php require COMPONENTS_PATH . 'header.php'; ?>
 <main><?php require $render_page; ?></main>
 <?php require COMPONENTS_PATH . 'footer.php'; ?>

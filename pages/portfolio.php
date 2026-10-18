@@ -3,13 +3,30 @@
  * Portfolio main page - displays all active projects
  */
 $projects = projectGetAllActive();
+$ghPanel  = githubLivePanelHtml();
+$ghTheme  = githubLiveTheme();
 ?>
 
 <section class="portfolio">
     <div class="portfolio__container">
         <h1 class="portfolio__title">Мої Проєкти</h1>
         <p class="portfolio__subtitle">Ласкаво просимо до мого портфоліо</p>
-        
+
+        <?php if ($ghPanel !== ''): ?>
+            <section class="github-panel github-panel--<?= $ghTheme ?>" aria-label="Жива статистика GitHub">
+                <div class="github-panel__head">
+                    <h2 class="github-panel__title">Живий GitHub</h2>
+                    <p class="github-panel__subtitle">
+                        Дані тягнуться з мого власного API —
+                        <a href="https://github.com/shongeorg/elysia-gihub-generator"
+                           target="_blank" rel="noopener noreferrer">elysia-gihub-generator</a>
+                    </p>
+                </div>
+
+                <?= $ghPanel ?>
+            </section>
+        <?php endif; ?>
+
         <?php if (empty($projects)): ?>
             <div class="portfolio__empty">
                 <p>Проєктів поки що немає</p>
