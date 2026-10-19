@@ -4,6 +4,16 @@ FROM dunglas/frankenphp:1-php8.5-alpine
 # тому ставимо тільки якщо його немає.
 RUN php -m | grep -qi '^pdo_pgsql$' || install-php-extensions pdo_pgsql
 
+# Сайт викликає header() (редіректи адмінки) вже після HTML — як на звичайному
+# хостингу потрібен output buffering, інакше "headers already sent".
+RUN printf '%s\n' \
+        'output_buffering = 4096' \
+        'expose_php = Off' \
+        'session.save_path = /tmp/php-site/sessions' \
+        'session.cookie_httponly = 1' \
+        'session.cookie_samesite = Lax' \
+        > /usr/local/etc/php/conf.d/zz-php-site.ini
+
 WORKDIR /app
 
 # Уся сайт у образі: деплой read-only, писати можна лише в /tmp.
