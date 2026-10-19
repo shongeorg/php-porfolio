@@ -1,7 +1,7 @@
 {
   "site": {
     "name": "Портфоліо розробника | Пан Кіт",
-    "url": "https://pan-kit.infinityfreeapp.com",
+    "url": "https://pan-kit.vercel.app",
     "author": "Пан Кіт",
     "language": "uk"
   },
@@ -12,7 +12,7 @@
       "keywords": "портфоліо розробника, веб розробка, PHP програміст, JavaScript, HTML, CSS, створення сайтів, фронтенд, бекенд, GitHub, проєкти",
       "robots": "index, follow",
       "ogType": "website",
-      "canonical": "https://pan-kit.infinityfreeapp.com/"
+      "canonical": "https://pan-kit.vercel.app/"
     },
     "admin": {
       "title": "Панель адміністратора | Портфоліо",
@@ -20,7 +20,7 @@
       "keywords": "адмінка, панель управління, адміністрування портфоліо",
       "robots": "noindex, nofollow",
       "ogType": "website",
-      "canonical": "https://pan-kit.infinityfreeapp.com/?page=admin"
+      "canonical": "https://pan-kit.vercel.app/?page=admin"
     },
     "admin-login": {
       "title": "Вхід для адміністратора | Портфоліо",
@@ -28,7 +28,7 @@
       "keywords": "вхід, логін, авторизація, адмін",
       "robots": "noindex, nofollow",
       "ogType": "website",
-      "canonical": "https://pan-kit.infinityfreeapp.com/?page=admin-login"
+      "canonical": "https://pan-kit.vercel.app/?page=admin-login"
     },
     "404": {
       "title": "Сторінка не знайдена | Портфоліо",
@@ -36,7 +36,7 @@
       "keywords": "помилка, 404, не знайдено",
       "robots": "noindex, follow",
       "ogType": "website",
-      "canonical": "https://pan-kit.infinityfreeapp.com/?page=404"
+      "canonical": "https://pan-kit.vercel.app/?page=404"
     }
   },
   "meta": {
@@ -52,8 +52,8 @@
       "type": "website",
       "locale": "uk_UA",
       "siteName": "Портфоліо | Пан Кіт",
-      "url": "https://pan-kit.infinityfreeapp.com",
-      "image": "https://pan-kit.infinityfreeapp.com/public/og-image.jpg",
+      "url": "https://pan-kit.vercel.app",
+      "image": "https://pan-kit.vercel.app/og-image.jpg",
       "imageAlt": "Портфоліо веб-розробника Пан Кіт — проєкти з PHP та JavaScript"
     },
     "twitter": {
@@ -65,7 +65,7 @@
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Пан Кіт",
-      "url": "https://pan-kit.infinityfreeapp.com",
+      "url": "https://pan-kit.vercel.app",
       "jobTitle": "Веб-розробник",
       "description": "Веб-розробник, що спеціалізується на створенні сайтів та веб-додатків на PHP, JavaScript, HTML та CSS.",
       "nationality": "UA",

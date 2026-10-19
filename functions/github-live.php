@@ -48,6 +48,12 @@ function githubLiveTheme(): string
 function githubLiveCachePath(string $key): string
 {
     $dir = DATA_PATH . 'cache';
+
+    // На serverless-хостингах (Vercel) корінь проєкту read-only,
+    // тому кеш складаємо у тимчасову теку, якщо data/cache недоступна.
+    if (!is_dir($dir) || !is_writable($dir)) {
+        $dir = rtrim(sys_get_temp_dir(), '/\\') . '/php-site-cache';
+    }
     if (!is_dir($dir)) {
         @mkdir($dir, 0775, true);
     }

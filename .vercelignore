@@ -1,0 +1,14 @@
+# Що не відправляємо на Vercel. NEON_DB задається через Environment Variables.
+.git
+.github
+.vercel
+.vscode
+.qwen
+node_modules
+
+.env
+.env.*
+!.env.example
+
+data/cache
+*.log

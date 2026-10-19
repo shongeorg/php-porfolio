@@ -1,0 +1,24 @@
+{
+	frankenphp
+	admin off
+}
+
+:80 {
+	# Document root — public/, як у Herd. index.php тут є front controller,
+	# який підключає ../index.php з кореня проєкту.
+	root * /app/public
+	encode zstd br gzip
+
+	# Секрети та вихідники не мають віддаватися навіть як статика.
+	@private path /data/* /functions/* /pages/* /components/* /scripts/* /.env* /Dockerfile.vercel /Caddyfile /vercel.json /composer.* /project.md
+	respond @private 404
+
+	# Довгий кеш для статики.
+	@assets path /index.css /index.js /favicon.svg
+	header @assets Cache-Control "public, max-age=86400"
+
+	# Не світимо версію PHP.
+	header -X-Powered-By
+
+	php_server
+}

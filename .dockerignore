@@ -1,0 +1,14 @@
+.git
+.github
+.vercel
+.vscode
+.qwen
+node_modules
+
+# Секрети не потрапляють в образ — NEON_DB приходить з Environment Variables.
+.env
+.env.*
+!.env.example
+
+data/cache
+*.log

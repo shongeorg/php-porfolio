@@ -24,7 +24,13 @@ const FUNC_PATH = DOC_ROOT . "functions/";
 
 $page = $_GET["page"] ?? "portfolio";
 $file = $page . ".php";
-$render_page = PAGE_PATH . (file_exists(PAGE_PATH . $file) ? $file : '404.php');
+$page_exists = file_exists(PAGE_PATH . $file);
+$render_page = PAGE_PATH . ($page_exists ? $file : '404.php');
+
+// Невідома сторінка — віддаємо чесний 404, а не 200 з текстом "not found".
+if (!$page_exists) {
+    http_response_code(404);
+}
 
 include FUNC_PATH . 'data-base.php';
 include FUNC_PATH . 'security.php';

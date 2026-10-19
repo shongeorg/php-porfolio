@@ -3,4 +3,4 @@ Allow: /
 Disallow: /?page=admin
 Disallow: /?page=admin-*
 
-Sitemap: https://pan-kit.infinityfreeapp.com/sitemap.xml
+Sitemap: https://pan-kit.vercel.app/sitemap.xml
