@@ -32,6 +32,9 @@ if (!$page_exists) {
     http_response_code(404);
 }
 
+// Для SEO-тегів у невідомої сторінки використовуємо набір "404".
+$seo_page = $page_exists ? $page : '404';
+
 include FUNC_PATH . 'data-base.php';
 include FUNC_PATH . 'security.php';
 include FUNC_PATH . 'seo.php';
@@ -42,7 +45,7 @@ include FUNC_PATH . 'github-live.php';
 <!doctype html>
 <html lang="uk">
 <head>
-    <?php seoRenderTags($page); ?>
+    <?php seoRenderTags($seo_page); ?>
     <link rel="stylesheet" href="<?= ASSET_BASE ?>index.css">
 </head>
 <body data-theme="<?= githubLiveTheme() ?>">
