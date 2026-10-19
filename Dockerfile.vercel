@@ -10,6 +10,7 @@ RUN printf '%s\n' \
         'output_buffering = 4096' \
         'expose_php = Off' \
         'session.save_path = /tmp/php-site/sessions' \
+        'session.gc_maxlifetime = 86400' \
         'session.cookie_httponly = 1' \
         'session.cookie_samesite = Lax' \
         > /usr/local/etc/php/conf.d/zz-php-site.ini

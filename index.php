@@ -1,11 +1,5 @@
 <?php
 
-// Сесія стартує ДО будь-якого виводу, щоб не ловити
-// "session cannot be started after headers sent" у header.php/seo-тегах
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
 // DOC_ROOT обчислюємо від розташування index.php, а НЕ від DOCUMENT_ROOT:
 // корінь сайту в Herd може бути public/, тоді DOCUMENT_ROOT вказує туди.
 define("DOC_ROOT", __DIR__ . "/");
@@ -36,7 +30,15 @@ if (!$page_exists) {
 $seo_page = $page_exists ? $page : '404';
 
 include FUNC_PATH . 'data-base.php';
+include FUNC_PATH . 'session-db.php';
 include FUNC_PATH . 'security.php';
+
+// Сесія стартує ДО будь-якого виводу, щоб не ловити
+// "session cannot be started after headers sent" у header.php/seo-тегах.
+// У контейнері Vercel дані сесії живуть у Postgres — інакше логін
+// губиться, коли запит потрапляє на інший інстанс.
+sessionDbStart();
+
 include FUNC_PATH . 'seo.php';
 include FUNC_PATH . 'github-live.php';
 ?>
