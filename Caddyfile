@@ -17,6 +17,13 @@
 	@assets path /index.css /index.js /favicon.svg
 	header @assets Cache-Control "public, max-age=86400"
 
+	# Відсутні статичні файли — чесний 404, а не HTML застосунку.
+	@missingStatic {
+		not file {path}
+		path *.jpg *.jpeg *.png *.gif *.webp *.avif *.svg *.ico *.css *.js *.map *.woff *.woff2 *.ttf
+	}
+	respond @missingStatic 404
+
 	# Не світимо версію PHP.
 	header -X-Powered-By
 
